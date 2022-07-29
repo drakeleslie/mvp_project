@@ -1,7 +1,10 @@
 const body = document.body;
-const btn = $("button");
+const 
+//const ppl = `/ppl/exercises/${}`
+
 $.get("/ppl", (data) => {
-  console.log(data);
+  let result = JSON.stringify(data);
+  document.write(result);
 });
 $.get("/ppl/exercises", (data) => {
   console.log(data);
