@@ -1,8 +1,10 @@
 import pg from "pg";
 import express from "express";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
-const port = 8080;
+const port = process.env.port;
 
 app.use(express.json());
 app.use(express.static("static"));

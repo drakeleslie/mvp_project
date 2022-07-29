@@ -1,5 +1,5 @@
 const body = document.body;
-const 
+//const
 //const ppl = `/ppl/exercises/${}`
 
 $.get("/ppl", (data) => {
