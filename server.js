@@ -52,6 +52,22 @@ app.get("/ppl/exercises/:pplId", (req, res) => {
     });
 });
 
+//show journal
+app.get("/ppl/journal", (req, res) => {
+  pool.query(`SELECT * FROM journal`).then((data) => {
+    res.send(data.rows);
+  });
+});
+
+//send exercises to journal
+// app.post(
+//   `/ppl/journal`,
+//   bodyParser.urlencoded({ extended: false }),
+//   (req, res) => {
+//     //let
+//   }
+// );
+
 app.use((err, req, res, next) => {
   res.sendStatus(500);
 });

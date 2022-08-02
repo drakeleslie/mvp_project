@@ -1,5 +1,6 @@
 const body = document.body;
 const desc = $(`div [class="desc"]`);
+
 ///////GET REQUESTS FOR PPL LIFTS//////////////////
 $.get("/ppl/exercises/push", (data) => {
   let pushBtn = $(`button[class="push-lifts"]`);
@@ -26,14 +27,29 @@ $.get("/ppl/exercises/legs", (data) => {
 });
 //////////////////////////////////////////////////
 
+/////////GET REQUESTS FOR JOURNAL/////////////////
+$.get("/ppl/journal", (data) => {});
+
 function liftFormat(data) {
   for (let i = 0; i < data.length; i++) {
     const liftName = data[i].name;
     const liftPrime = data[i].prime_movers;
     const liftSec = data[i].secondaries;
     const liftFreq = data[i].suggested_freq;
+
     const liftInfo = $(`<h1>${liftName}</h1>
+    <form action="/ppl/journal" method="post">
+    <label for="sets">Sets:</label>
+    <input type="text" name="sets" id="sets" />
+    <label for="reps">Reps:</label>
+    <input type="text" name="reps" id="reps" />
+    <label for="info">Notes:</label>
+    <input type="text" name="info" id="info" />
+    <input type="submit" value="submit">
+    </form>
                       <h3>Prime movers: ${liftPrime}<h4>Secondary movers: ${liftSec}<h4>Suggested frequency: ${liftFreq}</h4></h4></h3>`);
     desc.append(liftInfo);
   }
 }
+
+console.log();

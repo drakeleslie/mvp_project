@@ -1,5 +1,9 @@
-DROP TABLE IF EXISTS exercises; 
-DROP TABLE IF EXISTS ppl;
+
+DROP TABLE IF EXISTS exercises CASCADE; 
+DROP TABLE IF EXISTS journal CASCADE;
+DROP TABLE IF EXISTS ppl CASCADE;
+
+
 
 
 
@@ -11,11 +15,19 @@ CREATE TABLE ppl (
 
 CREATE TABLE exercises (
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    name TEXT UNIQUE,
     prime_movers TEXT,
     secondaries TEXT,
     suggested_freq TEXT,
     ppl_id INTEGER REFERENCES ppl(id)
+);
+
+CREATE TABLE journal (
+    id SERIAL PRIMARY KEY,
+    name TEXT REFERENCES exercises(name),
+    sets TEXT,
+    reps TEXT,
+    info TEXT
 );
 
 INSERT INTO ppl (kind, info) VALUES ('push', 'Pushing exercises, consist of mostly Chest, Tricep and Shoulder work.');
