@@ -1,22 +1,27 @@
+* {
+  color: white;
+}
 body,
 html {
   height: 100%;
-  width: 100;
+  width: 100%;
+  justify-content: center;
 }
 body {
   margin: 0px;
 }
 .inner-body {
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 95%;
+  margin-left: 2.5%;
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas: "ppl info";
 }
 .category {
-  grid-area: ppl;
+  width: 100%;
   height: 100%;
-  width: 100;
+  grid-area: ppl;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
@@ -24,6 +29,18 @@ body {
     "pull"
     "legs";
   background-color: black;
+}
+#push {
+  grid-area: push;
+  background-color: blue;
+}
+#pull {
+  grid-area: pull;
+  background-color: aqua;
+}
+#legs {
+  grid-area: legs;
+  background-color: aquamarine;
 }
 .info {
   grid-area: info;
@@ -34,4 +51,14 @@ body {
   grid-template-areas:
     "desc"
     "journal";
+  background-color: black;
+}
+.desc {
+  grid-area: desc;
+
+  background-color: darkblue;
+}
+.journal {
+  grid-area: journal;
+  background-color: darkcyan;
 }
