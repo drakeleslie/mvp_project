@@ -59,7 +59,7 @@ function liftFormat(data) {
     $(`#form${i}`).on("submit", (event) => {
       console.log("click");
       event.preventDefault();
-      storeLift(data, i);
+      storeLift(i);
     });
   }
 }
@@ -78,7 +78,7 @@ function journalFormat(data) {
   }
 }
 
-function storeLift(data, i) {
+function storeLift(i) {
   let liftName = $(`#name${i}`).val();
   let liftSets = $(`#sets${i}`).val();
   let liftReps = $(`#reps${i}`).val();
