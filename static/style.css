@@ -10,6 +10,9 @@ html {
 body {
   margin: 0px;
 }
+button {
+  color: black;
+}
 .inner-body {
   height: 100%;
   width: 95%;
@@ -61,4 +64,7 @@ body {
 .journal {
   grid-area: journal;
   background-color: darkcyan;
+}
+.left {
+  float: left;
 }

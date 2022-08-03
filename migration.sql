@@ -9,8 +9,8 @@ DROP TABLE IF EXISTS ppl CASCADE;
 
 CREATE TABLE ppl (
     id SERIAL PRIMARY KEY,
-    kind TEXT,
-    info TEXT
+    kind TEXT NOT NULL,
+    info TEXT NOT NULL
 );
 
 CREATE TABLE exercises (
@@ -24,10 +24,10 @@ CREATE TABLE exercises (
 
 CREATE TABLE journal (
     id SERIAL PRIMARY KEY,
-    name TEXT REFERENCES exercises(name),
-    sets TEXT,
-    reps TEXT,
-    info TEXT
+    name TEXT NOT NULL REFERENCES exercises(name),
+    sets TEXT NOT NULL,
+    reps TEXT NOT NULL,
+    info TEXT NOT NULL
 );
 
 INSERT INTO ppl (kind, info) VALUES ('push', 'Pushing exercises, consist of mostly Chest, Tricep and Shoulder work.');
@@ -52,7 +52,7 @@ INSERT INTO exercises (name, prime_movers, secondaries, suggested_freq, ppl_id) 
 INSERT INTO exercises (name, prime_movers, secondaries, suggested_freq, ppl_id) VALUES ('Romanian Deadlift', 'Hamstrings', 'Glutes and Erector Spinae(posterior chain)', '1-2 times a week', 3);
 INSERT INTO exercises (name, prime_movers, secondaries, suggested_freq, ppl_id) VALUES ('Hip Thrust', 'Glutes', 'Hamstrings, Core, Quads', '1-2 times a week', 3);
 
-
+INSERT INTO journal (name, sets, reps, info) VALUES ('Leg Curl', '3', '16', 'failure')
 
 
 

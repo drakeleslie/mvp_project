@@ -18,7 +18,6 @@ const pool = new pg.Pool({
         },
       }
     : {}),
-  //database: "ppl",
 });
 
 //ppl
@@ -37,7 +36,6 @@ app.get("/ppl/exercises", (req, res) => {
 
 //Push/Pull/Leg exercises
 app.get("/ppl/exercises/:pplId", (req, res) => {
-  console.log(req.params.pplId);
   let pplId = req.params.pplId;
   if (pplId === "push") pplId = 1;
   else if (pplId === "pull") pplId = 2;
@@ -60,13 +58,31 @@ app.get("/ppl/journal", (req, res) => {
 });
 
 //send exercises to journal
-// app.post(
-//   `/ppl/journal`,
-//   bodyParser.urlencoded({ extended: false }),
-//   (req, res) => {
-//     //let
-//   }
-// );
+app.post("/ppl/journal", (req, res) => {
+  const { name, sets, reps, info } = req.body;
+  pool
+    .query(
+      `INSERT INTO journal (
+    name,
+    sets,
+    reps,
+    info)
+    VALUES(
+      $1,
+      $2,
+      $3,
+      $4
+    )
+    RETURNING *;`,
+      [name, sets, reps, info]
+    )
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 app.use((err, req, res, next) => {
   res.sendStatus(500);
