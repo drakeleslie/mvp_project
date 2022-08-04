@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Uchen&display=swap"
+      rel="stylesheet"
+    />
     <link href="style.css" rel="stylesheet" />
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="app.js"></script>
@@ -13,16 +19,22 @@
     <div class="inner-body">
       <div class="category">
         <div class="ppl" id="push">
-          <button class="push-lifts">push</button>
+          <button class="lift-buttons" id="push-lifts">push</button>
         </div>
         <div class="ppl" id="pull">
-          <button class="pull-lifts">pull</button>
+          <button class="lift-buttons" id="pull-lifts">pull</button>
         </div>
-        <div class="ppl" id="legs"><button class="leg-lifts">legs</button></div>
+        <div class="ppl" id="legs">
+          <button class="lift-buttons" id="leg-lifts">legs</button>
+        </div>
       </div>
+
       <div class="info">
+        <div class="switch">
+          <button id="journal-btn" class="switch-buttons">journal</button>
+          <button id="delete-btn" class="switch-buttons">delete</button>
+        </div>
         <div class="desc"></div>
-        <div class="journal"></div>
       </div>
     </div>
   </body>

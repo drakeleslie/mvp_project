@@ -72,15 +72,32 @@ app.post("/ppl/journal", (req, res) => {
       $2,
       $3,
       $4
-    )
-    RETURNING *;`,
+    );`,
       [name, sets, reps, info]
     )
     .then((result) => {
-      res.send(result.rows);
+      res.send(result);
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+//delete all logs into journal
+app.delete("/ppl/journal", (req, res) => {
+  pool
+    .query(
+      `DROP TABLE IF EXISTS journal; 
+  CREATE TABLE journal (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL REFERENCES exercises(name),
+    sets TEXT NOT NULL,
+    reps TEXT NOT NULL,
+    info TEXT NOT NULL
+); `
+    )
+    .then((data) => {
+      res.send(data.rows);
     });
 });
 

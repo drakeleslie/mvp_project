@@ -4,33 +4,40 @@ const journal = $(`div [class="journal"]`);
 
 ///////GET REQUESTS FOR PPL LIFTS//////////////////
 $.get("/ppl/exercises/push", (data) => {
-  let pushBtn = $(`button[class="push-lifts"]`);
+  let pushBtn = $(`#push-lifts`);
 
   pushBtn.on("click", (event) => {
+    desc.empty();
     liftFormat(data);
   });
 });
 
 $.get("/ppl/exercises/pull", (data) => {
-  let pullBtn = $(`button[class="pull-lifts"]`);
+  let pullBtn = $(`#pull-lifts`);
 
   pullBtn.on("click", (event) => {
+    desc.empty();
     liftFormat(data);
   });
 });
 
 $.get("/ppl/exercises/legs", (data) => {
-  let legBtn = $(`button[class="leg-lifts"]`);
+  let legBtn = $(`#leg-lifts`);
 
   legBtn.on("click", (event) => {
+    desc.empty();
     liftFormat(data);
   });
 });
 //////////////////////////////////////////////////
 
 /////////GET REQUESTS FOR JOURNAL/////////////////
-$.get("/ppl/journal", (data) => {
+$.get(`/ppl/journal`, (data) => {
   journalFormat(data);
+  $(`#journal-btn`).on("click", (event) => {
+    journalFormat(data);
+    location.reload();
+  });
 });
 ///////////////////////////////////////////////////
 
@@ -43,43 +50,46 @@ function liftFormat(data) {
     const liftFreq = data[i].suggested_freq;
 
     const liftInfo =
-      $(`<form id="form${i}"><h1 class="lift${i}">${liftName}</h1>
-    <label for="name">Name:</label>
-    <input id="name${i}" type="text" value="${liftName}" name="name">
+      $(`<form class="lift-text" id="form${i}"><h1 class="lift${i}">${liftName}</h1>
+    <h3>Primary muscles: ${liftPrime} <h4>-Secondary muscles: ${liftSec}<h4>Suggested frequency: ${liftFreq}</h4></h4></h3>
     <label for="sets">Sets:</label>
     <input type="text" name="sets" id="sets${i}" />
     <label for="reps">Reps:</label>
     <input type="text" name="reps" id="reps${i}" />
     <label for="info">Notes:</label>
     <input type="text" name="info" id="info${i}" />
-    <button type="submit" class="submitLift">click</button>
-    <h3 class="left">Primary muscles: ${liftPrime} <h4>-Secondary muscles: ${liftSec}<h4>Suggested frequency: ${liftFreq}</h4></h4></h3></form>`);
+    <button type="submit" class="submitLift">submit</button></form>`);
 
     desc.append(liftInfo);
     $(`#form${i}`).on("submit", (event) => {
+      //desc.empty();
       console.log("click");
       event.preventDefault();
-      storeLift(i);
+      storeLift(i, liftName);
+      // $.get(`/ppl/journal`, (data) => {
+      //   journalFormat(data);
+      // });
     });
   }
 }
-
+/////////////////////////////////////////////////
 function journalFormat(data) {
   for (let i = 0; i < data.length; i++) {
     const liftName = data[i].name;
     const liftSets = data[i].sets;
     const liftReps = data[i].reps;
     const liftDesc = data[i].info;
-
-    const liftInfo = $(
-      `<h4 class="left">${liftName} - </h4><h3>${liftSets} x ${liftReps} / ${liftDesc}</h3><br>`
+    const liftLog = $(
+      `<form id="log${i}" class="journal-text"><h4>${liftName} - <h3>${liftSets} x ${liftReps} / ${liftDesc}</h3></h4></form><hr>`
+      //`<h4>${liftName} - <h3>${liftSets} x ${liftReps} / ${liftDesc}</h3></h4>`
     );
-    journal.append(liftInfo);
+    //liftLog.empty();
+    console.log(liftLog);
+    desc.append(liftLog);
   }
 }
-
-function storeLift(i) {
-  let liftName = $(`#name${i}`).val();
+//////////////////////////////////////////////
+function storeLift(i, liftName) {
   let liftSets = $(`#sets${i}`).val();
   let liftReps = $(`#reps${i}`).val();
   const liftInfo = $(`#info${i}`).val();
@@ -99,3 +109,17 @@ function storeLift(i) {
     },
   });
 }
+///////////////////////////////////////////
+function deleteJournal() {
+  $.ajax({
+    url: `/ppl/journal`,
+    type: "DELETE",
+    success: function (data) {
+      console.log(data);
+    },
+  });
+}
+$(`#delete-btn`).on("click", (event) => {
+  deleteJournal();
+  location.reload();
+});

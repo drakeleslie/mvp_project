@@ -9,8 +9,15 @@ html {
 }
 body {
   margin: 0px;
+  background-image: url("/assets/jimwallpaper.jpg");
+  background-size: cover;
+  font-family: "Uchen", serif;
 }
 button {
+  font-family: "Uchen", serif;
+  color: black;
+}
+input {
   color: black;
 }
 .inner-body {
@@ -22,8 +29,9 @@ button {
   grid-template-areas: "ppl info";
 }
 .category {
-  width: 100%;
-  height: 100%;
+  margin-top: 75px;
+  width: 150px;
+  height: 675px;
   grid-area: ppl;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -31,35 +39,35 @@ button {
     "push"
     "pull"
     "legs";
-  background-color: black;
 }
 #push {
   grid-area: push;
-  background-color: blue;
 }
 #pull {
   grid-area: pull;
-  background-color: aqua;
 }
 #legs {
   grid-area: legs;
-  background-color: aquamarine;
 }
 .info {
   grid-area: info;
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 3fr 1fr;
+  grid-template-rows: 75px 3fr;
   grid-template-areas:
-    "desc"
-    "journal";
-  background-color: black;
+    "switch"
+    "desc";
+}
+.switch {
+  grid-area: switch;
 }
 .desc {
   grid-area: desc;
-
-  background-color: darkblue;
+  margin-bottom: 50px;
+  background-color: rgba(0, 0, 139, 0.25);
+  border-style: solid;
+  border-color: black;
 }
 .journal {
   grid-area: journal;
@@ -67,4 +75,34 @@ button {
 }
 .left {
   float: left;
+}
+.lift-buttons {
+  width: 300px;
+  height: 150px;
+  background-color: black;
+  color: white;
+  border-style: outset;
+  border-color: black;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.2);
+  font-size: 24px;
+}
+.switch-buttons {
+  width: 45%;
+  height: 37.5px;
+  background: black;
+  color: white;
+  border-style: outset;
+  border-color: black;
+  border-radius: 20px;
+  margin-top: 18.75px;
+  margin-left: 25px;
+  font-size: 16px;
+  box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.2);
+}
+.lift-text {
+  margin-left: 25px;
+}
+.journal-text {
+  margin-left: 25px;
 }
